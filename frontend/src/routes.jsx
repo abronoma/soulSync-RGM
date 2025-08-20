@@ -3,6 +3,7 @@ import { LandingPage } from "./pages/LandingPage";
 import AuthPage from "./pages/AuthPage";
 import AddSoul from "./pages/AddSoul"; 
 
+
 function App() {
   return (
     <Router>
