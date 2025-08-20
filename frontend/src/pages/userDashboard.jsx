@@ -28,7 +28,7 @@ const WelcomeDashboard = () => {
       day: "numeric",
     })
   );
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState();
   const [isMobile, setIsMobile] = useState(false);
 
   
