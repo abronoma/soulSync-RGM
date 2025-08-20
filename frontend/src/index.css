@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/* RGM Color Palette - Professional Standards */
+
+/* Primary Colors */
+.bg-primary { background-color: #2A2A2A; } /* Dark charcoal from logo background */
+.bg-secondary { background-color: #D946EF; } /* Bright magenta from logo */
+.bg-tertiary { background-color: #F59E0B; } /* Golden yellow from logo */
+.bg-accent { background-color: #C026D3; } /* Deep purple accent */
+.bg-gold { background-color: #F59E0B; } /* Gold from logo */
+.bg-magenta { background-color: #E935C7; } /* Magenta variations */
+.bg-deep-magenta { background-color: #BE185D; } /* Deeper magenta */
+.bg-dark { background-color: #1F1F1F; } /* Darker background */
+.bg-darker { background-color: #0F0F0F; } /* Darkest background */
+.bg-light-gray { background-color: #374151; } /* Light gray for cards */
+.bg-card { background-color: #1E1E1E; } /* Card background */
+
+/* Text Colors */
+.text-primary { color: #FFFFFF; } /* White text */
+.text-secondary { color: #D1D5DB; } /* Light gray text */
+.text-tertiary { color: #9CA3AF; } /* Medium gray text */
+.text-accent { color: #D946EF; } /* Magenta text */
+.text-gold { color: #F59E0B; } /* Gold text */
+.text-magenta { color: #E935C7; } /* Magenta text */
+.text-deep-magenta { color: #BE185D; } /* Deep magenta text */
+.text-muted { color: #6B7280; } /* Muted text */
+
+/* Border Colors */
+.border-accent { border-color: #D946EF; }
+.border-gold { border-color: #F59E0B; }
+.border-magenta { border-color: #E935C7; }
+.border-deep-magenta { border-color: #BE185D; }
+.border-gray { border-color: #374151; }
+.border-light-gray { border-color: #4B5563; }
+
+/* Professional Gradients */
+.gradient-primary { 
+  background: linear-gradient(135deg, #D946EF 0%, #C026D3 100%); 
+}
+.gradient-secondary { 
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); 
+}
+.gradient-tertiary { 
+  background: linear-gradient(135deg, #E935C7 0%, #BE185D 100%); 
+}
+.gradient-professional { 
+  background: linear-gradient(135deg, #D946EF 0%, #F59E0B 50%, #C026D3 100%); 
+}
+.gradient-text {    
+  background: linear-gradient(135deg, #F59E0B 0%, #D946EF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-gold-magenta {    
+  background: linear-gradient(135deg, #F59E0B 0%, #E935C7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Professional Shadow Effects */
+.shadow-magenta { box-shadow: 0 10px 25px rgba(217, 70, 239, 0.2); }
+.shadow-gold { box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2); }
+.shadow-professional { box-shadow: 0 20px 40px rgba(217, 70, 239, 0.15); }
+.shadow-card { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+
+/* Hover Effects */
+.hover-magenta:hover { background-color: #E935C7; }
+.hover-gold:hover { background-color: #D97706; }
+.hover-scale:hover { transform: scale(1.05); }
+
+/* Professional Card Styles */
+.card-professional {
+  background: linear-gradient(135deg, rgba(217, 70, 239, 0.1) 0%, rgba(192, 38, 211, 0.1) 100%);
+  border: 1px solid rgba(217, 70, 239, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.card-professional:hover {
+  border-color: rgba(217, 70, 239, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(217, 70, 239, 0.2);
+}
+
+/* Button Styles */
+.btn-primary {
+  background: linear-gradient(135deg, #D946EF 0%, #C026D3 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #E935C7 0%, #D946EF 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(217, 70, 239, 0.3);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+}
