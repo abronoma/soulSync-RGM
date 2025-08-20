@@ -15,7 +15,7 @@ export const LandingPage = () => {
       </div>
 
       {/* Navigation */}
-      <nav className="flex justify-between items-center px-6 py-4 relative z-10 border-b border-white border-opacity-10">
+      <nav className="flex justify-between items-center px-6 py-4 fixed top-0 left-0 right-0 z-50 border-b border-white border-opacity-10 bg-black">
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-secondary">
             <Heart className="w-6 h-6 text-white" />
