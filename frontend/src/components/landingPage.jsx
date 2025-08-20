@@ -3,12 +3,18 @@ import { ChevronRight, Users, Target, Heart } from "lucide-react";
 import AuthModal from "../pages/Auth";
 
 export const LandingPage = () => {
-  const [authOpen, setAuthOpen] = useState(false); 
+  const [authOpen, setAuthOpen] = useState(false);
 
   return (
-    <div className="min-h-screen text-white relative overflow-hidden bg-dark">
+    <div
+      className="min-h-screen text-white relative overflow-hidden bg-cover bg-center"
+      style={{ backgroundImage: "url('/')" }} // 👈 background image from public folder
+    >
+      {/* Overlay to keep text readable */}
+      <div className="absolute inset-0 bg-black bg-opacity-60 z-0"></div>
+
       {/* Decorative Background Blobs */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
+      <div className="absolute inset-0 opacity-20 pointer-events-none z-0">
         <div className="absolute top-20 left-10 w-96 h-96 rounded-full bg-secondary blur-3xl opacity-30"></div>
         <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-gold blur-3xl opacity-20"></div>
         <div className="absolute top-1/2 left-1/3 w-64 h-64 rounded-full bg-magenta blur-3xl opacity-20"></div>
@@ -17,10 +23,7 @@ export const LandingPage = () => {
       {/* Navigation */}
       <nav className="flex justify-between items-center px-6 py-4 fixed top-0 left-0 right-0 z-50 border-b border-white border-opacity-10 bg-black">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-secondary">
-            <Heart className="w-6 h-6 text-white" />
-          </div>
-          <span className="text-2xl font-bold text-fuchsia-600">SoulSync</span>
+          <img src="/rgm.png" alt="SoulSync Logo" className="h-15 w-auto rounded-lg" />
         </div>
         <div className="hidden md:flex space-x-8">
           <a href="#features" className="text-secondary hover:text-white transition-colors font-medium">Features</a>
@@ -30,7 +33,7 @@ export const LandingPage = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative px-6 py-20 bg-darker text-center">
+      <section className="relative px-6 py-20 text-center z-10">
         <div className="relative z-10 max-w-5xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             Track Every <span className="text-fuchsia-500">Soul</span>
@@ -38,12 +41,11 @@ export const LandingPage = () => {
           </h1>
           <p className="text-md md:text-xl mb-10 max-w-3xl mx-auto leading-relaxed text-secondary">
             From prayer to conversation to salvation, manage your soul-winning
-            journey with purpose and precision through our professional
-            platform.
+            journey with purpose and precision through our professional platform.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button
-              onClick={() => setAuthOpen(true)} // 👈 Trigger modal
+              onClick={() => setAuthOpen(true)}
               className="btn-primary shadow-magenta group text-lg font-semibold flex items-center gap-2"
             >
               Start Your Journey
@@ -57,7 +59,7 @@ export const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 px-6 bg-dark relative">
+      <section id="features" className="py-20 px-6 relative z-10 bg-black bg-opacity-70">
         <div className="max-w-6xl mx-auto text-center relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4 text-white">Soul-Winning Tools</h2>
@@ -73,8 +75,7 @@ export const LandingPage = () => {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-white">Prayer Management</h3>
               <p className="text-secondary leading-relaxed">
-                Organize prayer lists with detailed tracking, set reminders, and
-                monitor spiritual progress for each soul you're interceding for.
+                Organize prayer lists with detailed tracking, set reminders, and monitor spiritual progress for each soul you're interceding for.
               </p>
             </div>
 
@@ -84,8 +85,7 @@ export const LandingPage = () => {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-white">Contact Intelligence</h3>
               <p className="text-secondary leading-relaxed">
-                Advanced CRM features for documenting conversations, scheduling
-                follow-ups, and tracking spiritual milestones and breakthroughs.
+                Advanced CRM features for documenting conversations, scheduling follow-ups, and tracking spiritual milestones and breakthroughs.
               </p>
             </div>
 
@@ -95,9 +95,7 @@ export const LandingPage = () => {
               </div>
               <h3 className="text-xl font-semibold mb-4 text-white">Victory Analytics</h3>
               <p className="text-secondary leading-relaxed">
-                Celebrate salvations with comprehensive analytics, track your
-                spiritual impact, and generate meaningful reports for ministry
-                growth.
+                Celebrate salvations with comprehensive analytics, track your spiritual impact, and generate meaningful reports for ministry growth.
               </p>
             </div>
           </div>
@@ -105,7 +103,7 @@ export const LandingPage = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 px-6 bg-darker relative">
+      <section className="py-20 px-6 relative z-10 bg-black bg-opacity-70">
         <div className="max-w-5xl mx-auto text-center relative z-10">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Global Impact Statistics</h2>
           <p className="text-xl text-secondary mb-12 max-w-2xl mx-auto">
@@ -135,7 +133,7 @@ export const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="px-6 py-8 relative border-t border-white border-opacity-10 bg-dark">
+      <footer className="px-6 py-8 relative border-t border-white border-opacity-10 z-10 bg-black bg-opacity-70">
         <div className="max-w-6xl mx-auto text-center relative z-10">
           <div className="flex items-center justify-center space-x-3 mb-4">
             <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-secondary">
