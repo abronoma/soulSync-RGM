@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import morgan from "morgan";
 import { userRouter} from './routes/auth.js';
-import { addSoulRouter } from './routes/addSoul.js';
+import { soulRouter } from './routes/soul.js';
 import "dotenv/config";
 import cors from "cors"
 
@@ -27,7 +27,7 @@ app.use(morgan("dev"));
 
 //Routes
 app.use("/api", userRouter);
-app.use("/api", addSoulRouter);
+app.use("/api", soulRouter);
 // app.use("/api", categoryRouter);
 // app.use("/api", farmerProductRouter);
 // app.use("/api", orderRouter);
