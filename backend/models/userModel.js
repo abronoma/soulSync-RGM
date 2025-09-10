@@ -1,13 +1,14 @@
 import { Schema, model } from "mongoose";
 import normalize from "normalize-mongoose";
+import { imageUpload } from "../middlewares/uploads.js";
 
 const userSchema = new Schema({
-  username: { type: String, required: true },
+  fullName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   phone: { type: String },
   contactName: { type: String },
-  uploadProfile: { type: String },
+  imageUpload: { type: String },
 
   role: {
     type: String,
