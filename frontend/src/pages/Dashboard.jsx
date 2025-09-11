@@ -1,12 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Heart, Plus, Bell, Menu, Search, Grid, UserPlus, FileText,
   PlusCircle, MessageSquare, X, User, ChevronRight
 } from 'lucide-react';
 import { Link } from "react-router-dom";
 
+// Import the Sidebar component
+import Sidebar from '../components/Sidebar';
+import Header from '../components/Header';
+
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [activeSection, setActiveSection] = useState("dashboard");
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  // Detect screen size
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (mobile && sidebarOpen) {
+        setSidebarOpen(true);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [sidebarOpen]);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(prev => !prev);
+    if (isMobile) {
+      document.body.style.overflow = sidebarOpen ? "auto" : "hidden"; // Corrected overflow logic
+    }
+  };
+
+  const handleMenuClick = (section) => {
+    setActiveSection(section);
+    if (isMobile) {
+      setSidebarOpen(true);
+      document.body.style.overflow = "auto";
+    }
+  };
 
   const chartData = [
     { name: 'Week 1', value: 20 },
@@ -89,164 +125,67 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0E0E17] text-[#F5F5FF] flex">
-      {/* Sidebar */}
-      <aside className="bg-[#1A1A2C] w-64 p-4 border-r border-[#2A2A3F] hidden lg:block">
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-[#D946EF]">
-              <Heart className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-xl font-bold text-[#D946EF]">SoulSync</span>
-          </div>
-        </div>
-
-        {/* User Profile */}
-        <div className="flex items-center space-x-3 p-3 bg-[#2A2A3F] rounded-lg mb-6">
-          <div className="w-10 h-10 rounded-full bg-[#D946EF] flex items-center justify-center">
-            <User className="w-5 h-5 text-white" />
-          </div>
-          <div>
-            <p className="text-sm font-semibold text-white">Welcome, John</p>
-            <p className="text-xs text-[#9999B5] truncate max-w-[140px]">evangelist.john@rgm.com</p>
-          </div>
-        </div>
-
-        <nav className="space-y-3 text-sm">
-          <Link 
-            to="/add-soul" 
-            className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-[#D946EF]/20 to-transparent border border-[#D946EF]/30 text-white hover:from-[#D946EF]/30 hover:to-transparent transition-all"
+    <div className="min-h-screen bg-[#0E0E17] text-[#F5F5FF] flex flex-col">
+      {/* Header */}
+      <header className="px-6 py-4 flex items-center justify-between sticky top-0 z-50 border-b border-white/10 bg-black/30 backdrop-blur-md w-full">
+        <div className="flex items-center gap-4">
+          {/* Sidebar Toggle */}
+          <button
+            onClick={toggleSidebar}
+            className={`p-2 rounded-md transition-all border border-white/10 ${
+              sidebarOpen
+                ? "bg-[#D946EF] text-white hover:bg-[#c026d3] shadow-lg shadow-[#D946EF]/30"
+                : "text-[#9999B5] hover:bg-white/10 hover:text-white"
+            }`}
+            aria-label="Toggle sidebar"
           >
-            <Plus size={18} />
-            <span>Add Soul</span>
-          </Link>
+            {sidebarOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
 
-          <button className="flex items-center space-x-3 p-3 rounded-lg text-[#9999B5] hover:text-white hover:bg-[#2A2A3F] transition-all w-full text-left">
-            <MessageSquare size={18} /> 
-            <span>Add Follow-Up</span>
-          </button>
-          
-          <button className="flex items-center space-x-3 p-3 rounded-lg text-[#9999B5] hover:text-white hover:bg-[#2A2A3F] transition-all w-full text-left">
-            <FileText size={18} /> 
-            <span>View Reports</span>
-          </button>
-          
-          <button className="flex items-center space-x-3 p-3 rounded-lg text-[#9999B5] hover:text-white hover:bg-[#2A2A3F] transition-all w-full text-left">
-            <Bell size={18} /> 
-            <span>Notifications</span>
-          </button>
-          
-          <button className="flex items-center space-x-3 p-3 rounded-lg text-[#9999B5] hover:text-white hover:bg-[#2A2A3F] transition-all w-full text-left">
-            <UserPlus size={18} /> 
-            <span>Add Team Member</span>
-          </button>
-          
-          <button className="flex items-center space-x-3 p-3 rounded-lg text-[#9999B5] hover:text-white hover:bg-[#2A2A3F] transition-all w-full text-left">
-            <Grid size={18} /> 
-            <span>Assign/Reassign Soul</span>
-          </button>
-        </nav>
-      </aside>
-
-      {/* Mobile Sidebar */}
-      {sidebarOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          <div 
-            className="absolute inset-0 bg-black/70"
-            onClick={() => setSidebarOpen(false)}
-          ></div>
-          <div className="absolute left-0 top-0 h-full w-64 bg-[#1A1A2C] p-4">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-[#D946EF]">
-                  <Heart className="w-6 h-6 text-white" />
-                </div>
-                <span className="text-xl font-bold text-[#D946EF]">SoulSync</span>
-              </div>
-              <button onClick={() => setSidebarOpen(false)}>
-                <X className="text-white" />
-              </button>
-            </div>
-            
-            {/* Mobile navigation items (same as desktop) */}
-            <nav className="space-y-3 text-sm">
-              <Link 
-                to="/add-soul" 
-                className="flex items-center gap-3 p-3 rounded-lg bg-gradient-to-r from-[#D946EF]/20 to-transparent border border-[#D946EF]/30 text-white hover:from-[#D946EF]/30 hover:to-transparent transition-all"
-                onClick={() => setSidebarOpen(false)}
-              >
-                <Plus size={18} />
-                <span>Add Soul</span>
-              </Link>
-
-              <button className="flex items-center space-x-3 p-3 rounded-lg text-[#9999B5] hover:text-white hover:bg-[#2A2A3F] transition-all w-full text-left">
-                <MessageSquare size={18} /> 
-                <span>Add Follow-Up</span>
-              </button>
-              
-              <button className="flex items-center space-x-3 p-3 rounded-lg text-[#9999B5] hover:text-white hover:bg-[#2A2A3F] transition-all w-full text-left">
-                <FileText size={18} /> 
-                <span>View Reports</span>
-              </button>
-              
-              <button className="flex items-center space-x-3 p-3 rounded-lg text-[#9999B5] hover:text-white hover:bg-[#2A2A3F] transition-all w-full text-left">
-                <Bell size={18} /> 
-                <span>Notifications</span>
-              </button>
-              
-              <button className="flex items-center space-x-3 p-3 rounded-lg text-[#9999B5] hover:text-white hover:bg-[#2A2A3F] transition-all w-full text-left">
-                <UserPlus size={18} /> 
-                <span>Add Team Member</span>
-              </button>
-              
-              <button className="flex items-center space-x-3 p-3 rounded-lg text-[#9999B5] hover:text-white hover:bg-[#2A2A3F] transition-all w-full text-left">
-                <Grid size={18} /> 
-                <span>Assign/Reassign Soul</span>
-              </button>
-            </nav>
+          {/* Brand */}
+          <div className="text-xl font-extrabold bg-gradient-to-r from-[#D946EF] to-yellow-400 bg-clip-text text-transparent">
+            SoulTrack
           </div>
-        </div>
-      )}
 
-      <div className="flex-1">
-        {/* Navbar */}
-        <header className="flex items-center justify-between p-4 border-b border-[#2A2A3F] bg-[#1A1A2C]">
-          <div className="flex items-center space-x-4">
-            <button 
-              className="lg:hidden text-[#F5F5FF]"
-              onClick={() => setSidebarOpen(true)}
-            >
-              <Menu size={24} />
-            </button>
-            <h1 className="text-xl font-semibold text-[#F5F5FF]">RGM Dashboard <span className="ml-2 bg-[#2A2A3F] px-2 py-1 rounded-full text-xs text-[#D946EF]">Active</span></h1>
-            <div className="hidden md:flex items-center -space-x-2">
-              {[1, 2, 3, 4].map((n, i) => (
-                <img
-                  key={i}
-                  src={`https://i.pravatar.cc/40?img=${n}`}
-                  alt="avatar"
-                  className="w-6 h-6 rounded-full border-2 border-[#1A1A2C]"
-                />
-              ))}
-              <span className="ml-2 text-xs text-[#9999B5]">+12 others</span>
-            </div>
-          </div>
-          <div className="flex items-center space-x-4">
-            <Search className="text-[#9999B5] hover:text-[#D946EF] cursor-pointer" />
-            <Bell className="text-[#9999B5] hover:text-[#D946EF] cursor-pointer" />
-            <Heart className="text-[#D946EF]" />
-            <div className="hidden md:flex flex-col items-end">
-              <div className="text-sm text-white">John Doe</div>
-              <div className="text-xs text-[#9999B5]">evangelist.john@rgm.com</div>
-            </div>
-            <img
-              src="https://i.pravatar.cc/40?img=5"
-              alt="User Avatar"
-              className="w-8 h-8 rounded-full border-2 border-[#D946EF]"
+          {/* Search (Desktop) */}
+          <div className="hidden md:flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2">
+            <Search className="w-4 h-4 text-[#9999B5]" />
+            <input
+              type="text"
+              placeholder="Search souls, analytics..."
+              className="bg-transparent text-white placeholder-[#9999B5] outline-none"
             />
           </div>
-        </header>
+        </div>
 
+        {/* Right icons */}
+        <div className="flex items-center gap-3">
+          <Bell className="w-5 h-5 text-[#9999B5] cursor-pointer hover:text-[#D946EF] transition-colors" />
+          <Settings className="w-5 h-5 text-[#9999B5] cursor-pointer hover:text-[#D946EF] transition-colors" />
+          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-[#D946EF] to-purple-600 flex items-center justify-center cursor-pointer hover:opacity-90 transition-opacity border border-white/10">
+            <User className="w-4 h-4" />
+          </div>
+        </div>
+      </header>
+
+      {/* Sidebar Component */}
+      <Sidebar
+        activeSection={activeSection}
+        setActiveSection={handleMenuClick}
+        isOpen={sidebarOpen}
+        isMobile={isMobile}
+        toggleSidebar={toggleSidebar}
+      />
+
+      {/* Mobile Overlay */}
+      {sidebarOpen && isMobile && (
+        <div
+          className="fixed inset-0 bg-black/60 z-30 md:hidden"
+          onClick={toggleSidebar}
+        />
+      )}
+
+      <div className="flex-1 pt-16">
         <main className="p-6 bg-[#0E0E17]">
           {/* Overview Tabs */}
           <div className="flex space-x-6 border-b border-[#2A2A3F] mb-6">

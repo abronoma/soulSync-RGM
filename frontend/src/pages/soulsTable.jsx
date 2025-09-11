@@ -10,6 +10,7 @@ const SoulTable = () => {
       gender: "Male", 
       status: "New", 
       location: "Accra",
+      GPS: "Accra",
       contact: "+233 24 123 4567",
       email: "michael.j@example.com",
       notes: "Interested in learning more about faith. Met at community event."
@@ -21,6 +22,7 @@ const SoulTable = () => {
       gender: "Female", 
       status: "Followed Up", 
       location: "Kumasi",
+      GPS: "Accra",
       contact: "+233 20 987 6543",
       email: "sarah.owusu@example.com",
       notes: "Previously attended church service. Asked about baptism."
@@ -32,6 +34,7 @@ const SoulTable = () => {
       gender: "Male", 
       status: "Discipled", 
       location: "Takoradi",
+      GPS: "Accra",
       contact: "+233 27 555 1234",
       email: "kwame.m@example.com",
       notes: "Regular attendee. Showing strong interest in leadership training."
@@ -114,15 +117,73 @@ const SoulTable = () => {
             <p className="text-[#9999B5]">Manage and track all souls in your care</p>
           </div>
           
-          <div className="overflow-x-auto">
-            <table className="w-full">
+          {/* Mobile Cards View */}
+          <div className="md:hidden">
+            <div className="space-y-3 p-4">
+              {souls.map((soul) => (
+                <div
+                  key={soul.id}
+                  className="bg-[#2A2A3F] rounded-lg p-4 border border-[#3A3A4F] hover:border-[#D946EF] transition-colors cursor-pointer"
+                  onClick={() => navigateToDashboard(soul)}
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#D946EF] to-[#9333EA] flex items-center justify-center mr-3">
+                        <User className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-white">{soul.name}</h3>
+                        <p className="text-sm text-[#9999B5]">{soul.age} • {soul.gender}</p>
+                      </div>
+                    </div>
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                        soul.status === "New"
+                          ? "bg-[#D946EF] text-white"
+                          : soul.status === "Followed Up"
+                          ? "bg-yellow-500 text-white"
+                          : "bg-green-500 text-white"
+                      }`}
+                    >
+                      {soul.status}
+                    </span>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-2 text-sm">
+                    <div className="flex items-center text-[#9999B5]">
+                      <MapPin className="w-4 h-4 mr-1" />
+                      <span className="truncate">{soul.location}</span>
+                    </div>
+                    <div className="flex items-center text-[#9999B5]">
+                      <Phone className="w-4 h-4 mr-1" />
+                      <span className="truncate">{soul.contact}</span>
+                    </div>
+                  </div>
+                  
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigateToDashboard(soul);
+                    }}
+                    className="w-full mt-3 bg-[#3A3A4F] hover:bg-[#4A4A5F] text-[#D946EF] hover:text-[#c026d3] font-medium py-2 rounded-lg transition-colors"
+                  >
+                    View Details
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop Table View */}
+          <div className="hidden md:block overflow-x-auto">
+            <table className="w-full min-w-full">
               <thead className="bg-[#2A2A3F]">
                 <tr>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#9999B5]">Name</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#9999B5] hidden md:table-cell">Age</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#9999B5] hidden lg:table-cell">Gender</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#9999B5]">Age</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#9999B5]">Gender</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#9999B5]">Status</th>
-                  <th className="px-4 py-3 text-left text-sm font-medium text-[#9999B5] hidden lg:table-cell">Location</th>
+                  <th className="px-4 py-3 text-left text-sm font-medium text-[#9999B5]">Location</th>
                   <th className="px-4 py-3 text-left text-sm font-medium text-[#9999B5]">Actions</th>
                 </tr>
               </thead>
@@ -141,8 +202,8 @@ const SoulTable = () => {
                         <span className="font-medium text-white">{soul.name}</span>
                       </div>
                     </td>
-                    <td className="px-4 py-3 hidden md:table-cell text-[#9999B5]">{soul.age}</td>
-                    <td className="px-4 py-3 hidden lg:table-cell text-[#9999B5]">{soul.gender}</td>
+                    <td className="px-4 py-3 text-[#9999B5]">{soul.age}</td>
+                    <td className="px-4 py-3 text-[#9999B5]">{soul.gender}</td>
                     <td className="px-4 py-3">
                       <span
                         className={`px-3 py-1 rounded-full text-xs font-semibold ${
@@ -156,7 +217,7 @@ const SoulTable = () => {
                         {soul.status}
                       </span>
                     </td>
-                    <td className="px-4 py-3 hidden lg:table-cell text-[#9999B5]">{soul.location}</td>
+                    <td className="px-4 py-3 text-[#9999B5]">{soul.location}</td>
                     <td className="px-4 py-3">
                       <button
                         onClick={(e) => {
@@ -209,7 +270,7 @@ const SoulTable = () => {
 
           <div className="p-4 md:p-6">
             {/* Soul Information */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
               <div className="bg-[#2A2A3F] p-4 rounded-lg border border-[#3A3A4F]">
                 <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
                   <User className="w-5 h-5 mr-2 text-[#D946EF]" />
@@ -254,12 +315,19 @@ const SoulTable = () => {
                       {selectedSoul.email}
                     </span>
                   </div>
+                  <div className="flex justify-between">
+                    <span className="text-[#9999B5]">GPS:</span>
+                    <span className="text-white flex items-center">
+                      <MapPin className="w-4 h-4 mr-1 text-[#D946EF]" />
+                      {selectedSoul.GPS}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Notes */}
-            <div className="bg-[#2A2A3F] p-4 rounded-lg border border-[#3A3A4F] mb-8">
+            <div className="bg-[#2A2A3F] p-4 rounded-lg border border-[#3A3A4F] mb-6 md:mb-8">
               <h3 className="text-lg font-semibold text-white mb-3">Notes</h3>
               <p className="text-[#CCCCEE]">{selectedSoul.notes}</p>
             </div>
@@ -267,9 +335,9 @@ const SoulTable = () => {
             {/* Follow Up Section */}
             <div className="bg-[#2A2A3F] p-4 rounded-lg border border-[#3A3A4F]">
               <h3 className="text-lg font-semibold text-white mb-4">Plan Follow Up</h3>
-              
+
               {/* Dropdown for follow-up type */}
-              <div className="relative mb-6">
+              <div className="mb-6">
                 <button
                   onClick={() => setShowFollowUpDropdown(!showFollowUpDropdown)}
                   className="w-full bg-[#3A3A4F] border border-[#4A4A5F] rounded-lg px-4 py-3 text-left flex items-center justify-between text-white hover:bg-[#4A4A5F] transition-colors"
@@ -277,9 +345,9 @@ const SoulTable = () => {
                   <span>{followUpType || "Select follow-up method"}</span>
                   {showFollowUpDropdown ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
                 </button>
-                
+
                 {showFollowUpDropdown && (
-                  <div className="absolute z-10 w-full mt-1 bg-[#3A3A4F] border border-[#4A4A5F] rounded-lg shadow-lg overflow-hidden">
+                  <div className="mt-2 w-full bg-[#3A3A4F] border border-[#4A4A5F] rounded-lg shadow-lg overflow-hidden flex flex-col">
                     <button
                       onClick={() => handleFollowUpSelect("Tech-inclined")}
                       className="w-full px-4 py-3 text-left text-white hover:bg-[#4A4A5F] flex items-center transition-colors"
@@ -298,9 +366,10 @@ const SoulTable = () => {
                 )}
               </div>
 
-              {/* Tech-inclined Form */}
-              {followUpType === "Tech-inclined" && (
-                <div className="bg-[#3A3A4F] p-4 rounded-lg border border-[#4A4A5F] mb-4">
+              {/* Display both forms always but conditionally show based on selection */}
+              <div className="space-y-4">
+                {/* Tech-inclined Form - Always rendered but conditionally shown */}
+                <div className={`bg-[#3A3A4F] p-4 rounded-lg border border-[#4A4A5F] ${followUpType !== "Tech-inclined" ? 'hidden' : ''}`}>
                   <h4 className="text-md font-semibold text-white mb-4 flex items-center">
                     <Smartphone className="w-5 h-5 mr-2 text-[#D946EF]" />
                     Tech Follow-up Plan
@@ -349,7 +418,7 @@ const SoulTable = () => {
                     
                     <div>
                       <label className="block text-sm font-medium text-[#9999B5] mb-2">Resources to Share</label>
-                      <div className="space-y-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {["E-book", "Video", "Podcast", "Article", "Online Event"].map(resource => (
                           <label key={resource} className="flex items-center">
                             <input
@@ -359,18 +428,16 @@ const SoulTable = () => {
                               onChange={handleTechFormChange}
                               className="rounded border-[#4A4A5F] text-[#D946EF] focus:ring-[#D946EF] bg-[#2A2A3F]"
                             />
-                            <span className="ml-2 text-white">{resource}</span>
+                            <span className="ml-2 text-white text-sm">{resource}</span>
                           </label>
                         ))}
                       </div>
                     </div>
                   </div>
                 </div>
-              )}
 
-              {/* Non-tech inclined Form */}
-              {followUpType === "Non-tech inclined" && (
-                <div className="bg-[#3A3A4F] p-4 rounded-lg border border-[#4A4A5F] mb-4">
+                {/* Non-tech inclined Form - Always rendered but conditionally shown */}
+                <div className={`bg-[#3A3A4F] p-4 rounded-lg border border-[#4A4A5F] ${followUpType !== "Non-tech inclined" ? 'hidden' : ''}`}>
                   <h4 className="text-md font-semibold text-white mb-4 flex items-center">
                     <Book className="w-5 h-5 mr-2 text-[#D946EF]" />
                     Non-Tech Follow-up Plan
@@ -442,13 +509,13 @@ const SoulTable = () => {
                     </div>
                   </div>
                 </div>
-              )}
+              </div>
 
               {/* Submit Button */}
               {followUpType && (
                 <button
                   onClick={submitFollowUp}
-                  className="w-full bg-gradient-to-r from-[#D946EF] to-[#9333EA] hover:from-[#c026d3] hover:to-[#7e22ce] text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center transition-all duration-300"
+                  className="w-full mt-4 bg-gradient-to-r from-[#D946EF] to-[#9333EA] hover:from-[#c026d3] hover:to-[#7e22ce] text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center transition-all duration-300"
                 >
                   <Send className="w-5 h-5 mr-2" />
                   Schedule Follow-up

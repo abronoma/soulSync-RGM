@@ -1,7 +1,14 @@
 import React from "react";
 import { Plus, BarChart3, Eye, User } from "lucide-react";
+import Header from "./Header";
 
-const Sidebar = ({ activeSection, setActiveSection, collapsed, isMobile, toggleSidebar }) => {
+const Sidebar = ({ 
+  activeSection, 
+  setActiveSection, 
+  isOpen, 
+  isMobile, 
+  toggleSidebar
+}) => {
   const menuItems = [
     { key: "welcome", label: "Dashboard", icon: <User size={20} /> },
     { key: "addSoul", label: "Add Soul", icon: <Plus size={20} /> },
@@ -12,31 +19,18 @@ const Sidebar = ({ activeSection, setActiveSection, collapsed, isMobile, toggleS
 
   return (
     <>
-      {/* Mobile Overlay (closes sidebar when clicked) */}
-      {isMobile && !collapsed && (
-        <div
-          className="fixed inset-0 bg-black/50 z-30"
-          onClick={toggleSidebar}
-        />
-      )}
-
-      {/* Sidebar */}
+      {/* Sidebar Navigation - Only this part should be hidden/shown */}
       <aside
         className={`
-          fixed top-0 left-0 h-full bg-black border-r border-gray-800 z-40
-          flex flex-col transition-transform duration-300 ease-in-out
-          ${collapsed ? "-translate-x-full" : "translate-x-0"}
+          fixed top-0 left-0 h-full bg-gradient-to-b from-[#0F0F23] to-[#1A1A2E] border-r border-[#2D1B46] z-40
+          flex flex-col transition-all duration-300 ease-in-out shadow-2xl
+          ${isOpen ? "translate-x-0" : "-translate-x-full"}
           w-64
         `}
       >
-        <div className="flex-1 flex flex-col overflow-y-auto pt-20"> 
-          {/* push down so it doesn’t overlap navbar */}
-          <h3 className="text-xs uppercase tracking-wider text-gray-400 mt-2 px-4 mb-4">
-            Navigation
-          </h3>
-
-          {/* Menu */}
-          <nav className="space-y-1 px-2 flex-1">
+        {/* Navigation */}
+        <div className="flex-1 overflow-y-auto py-6 mt-16">
+          <nav className="space-y-2 px-4">
             {menuItems.map((item) => (
               <button
                 key={item.key}
@@ -45,22 +39,32 @@ const Sidebar = ({ activeSection, setActiveSection, collapsed, isMobile, toggleS
                   if (isMobile) toggleSidebar();
                 }}
                 className={`
-                  w-full flex items-center gap-3 px-4 py-3 rounded-lg
-                  transition-all text-sm font-medium
+                  w-full flex items-center gap-3 px-4 py-3 rounded-xl
+                  transition-all duration-200 text-sm font-medium
                   ${
                     activeSection === item.key
-                      ? "bg-fuchsia-500 text-white shadow-md shadow-fuchsia-500/30"
-                      : "text-gray-400 hover:bg-gray-900 hover:text-white"
+                      ? "bg-gradient-to-r from-[#D946EF] to-[#9333EA] text-white shadow-lg"
+                      : "text-[#9999B5] hover:bg-[#2D1B46] hover:text-white"
                   }
                 `}
               >
-                <span>{item.icon}</span>
-                <span>{item.label}</span>
+                <span className="flex items-center justify-center w-5">
+                  {item.icon}
+                </span>
+                <span className="flex-1 text-left">{item.label}</span>
               </button>
             ))}
           </nav>
         </div>
       </aside>
+
+      {/* Mobile Overlay */}
+      {isOpen && isMobile && (
+        <div
+          className="fixed inset-0 bg-black/60 z-30 md:hidden"
+          onClick={toggleSidebar}
+        />
+      )}
     </>
   );
 };
