@@ -1,7 +1,8 @@
 import { mongoose, Schema, model } from "mongoose";
 import normalize from "normalize-mongoose";
 
-const soulSchema = new Schema({
+const soulSchema = new Schema(
+  {
     fullName: { type: String, required: true },
     gender: { type: String, enum: ["Male", "Female"], required: true },
     age: { type: Number, required: true },
@@ -14,14 +15,18 @@ const soulSchema = new Schema({
       required: true,
     },
     notes: { type: String, default: "" },
+
+    // The volunteer assigned to this soul
     assignedVolunteer: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // links to volunteer user
-      default: null,
+      ref: "User",
+      required: true, // ✅ always required
     },
+
+    // The volunteer who logged this soul (same as assignedVolunteer in your case)
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // the one who logged this soul
+      ref: "User",
       required: true,
     },
   },
@@ -29,4 +34,5 @@ const soulSchema = new Schema({
 );
 
 soulSchema.plugin(normalize);
+
 export const SoulModel = model("Soul", soulSchema);

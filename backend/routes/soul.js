@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addSoul, getSouls, getSoulById, updateSoul, deleteSoul } from "../controllers/soul.js";
+import { addSoul, getSouls, getSoulById, getSoulsByVolunteer, updateSoul, deleteSoul } from "../controllers/soul.js";
 import { isAuthenticated, isAuthorized } from "../middlewares/auth.js";
 
 export const soulRouter = Router()
@@ -19,4 +19,6 @@ soulRouter.put("/:id", isAuthenticated, isAuthorized(["volunteer", "admin"]), up
 // Delete soul
 soulRouter.delete("/:id", isAuthenticated, isAuthorized(["admin"]), deleteSoul);
 
+// Fetch souls by volunteer
+soulRouter.get("/souls/volunteer/:volunteerId", isAuthenticated, getSoulsByVolunteer);
 
