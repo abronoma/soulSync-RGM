@@ -36,16 +36,18 @@ export const getSouls = async (req, res) => {
   }
 };
 
-// Get single soul by ID
+// Get single soul by ID(View Details)
 export const getSoulById = async (req, res) => {
   try {
-    const soul = await SoulModel.findById(req.params.id);
-    if (!soul) return res.status(404).json({ error: "Soul not found" });
+    const soul = await SoulModel.findById(req.params.id).populate("createdBy assignedVolunteer", "name email");
+    if (!soul) return res.status(404).json({ message: "Soul not found" });
+
     res.json(soul);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching soul", error: err.message });
   }
 };
+
 
 // Fetch all souls for a particular volunteer
  export const getSoulsByVolunteer = async (req, res) => {

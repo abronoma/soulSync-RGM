@@ -3,18 +3,19 @@ import mongoose from 'mongoose';
 import morgan from "morgan";
 import { userRouter} from './routes/auth.js';
 import { soulRouter } from './routes/soul.js';
+import {checkMissedFollowUps } from './cron/followupcheker.js'
 import "dotenv/config";
 import cors from "cors"
 
 
 const app = express();
+checkMissedFollowUps();
 const port = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
-
 
 
 //creating Database

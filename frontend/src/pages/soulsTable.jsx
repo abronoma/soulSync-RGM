@@ -72,6 +72,7 @@ const SoulTable = () => {
     location: "",
     materials: "",
   });
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
 
   // Navigation
   const navigateToDashboard = (soul) => {
@@ -257,7 +258,7 @@ const SoulTable = () => {
 
       {/* Dashboard / View Details */}
       {currentView === "dashboard" && selectedSoul && (
-        <div className="bg-[#1A1A2C] rounded-xl border border-[#2A2A3F] overflow-hidden">
+        <div className="bg-[#1A1A2C] rounded-xl border border-[#2A2A3F] overflow-hidden -mt-2">
           {/* Header */}
           <div className="p-4 md:p-6 bg-gradient-to-r from-[#1A1A2C] to-[#2A2A3F] border-b border-[#2A2A3F]">
             <div className="max-w-5xl mx-auto">
