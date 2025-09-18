@@ -1,46 +1,20 @@
+
 import React, { useState } from "react";
 import { ChevronRight, Users, Target, Heart, Menu, X, Star, ArrowRight, BookOpen, BarChart3, MessageCircle, Shield } from "lucide-react";
 import AuthModal from "../pages/Auth";
+import Navbar from "../components/navbar";
+import CountUp from "react-countup";
 
 export const LandingPage = () => {
   const [authOpen, setAuthOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen text-white relative overflow-hidden">
-      {/* Navigation - Transparent with blur */}
-      <nav className="flex justify-between items-center px-4 sm:px-6 py-5 fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/20 border-b border-white/10">
-        <div className="flex items-center space-x-2 sm:space-x-3">
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-r from-[#D946EF] to-[#9333EA] flex items-center justify-center">
-            <Heart className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
-          </div>
-          <span className="text-lg sm:text-xl font-bold text-white">SoulSync</span>
-        </div>
-        
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-6 lg:space-x-8">
-          <a href="#features" className="text-[#9999B5] hover:text-white transition-colors font-medium flex items-center">
-            Features
-          </a>
-          <a href="#stats" className="text-[#9999B5] hover:text-white transition-colors font-medium flex items-center">
-            Impact
-          </a>
-          <a href="#testimonials" className="text-[#9999B5] hover:text-white transition-colors font-medium flex items-center">
-            Testimonials
-          </a>
-          <a href="#contact" className="text-[#9999B5] hover:text-white transition-colors font-medium flex items-center">
-            Contact
-          </a>
-        </div>
+    <>
+    <Navbar />
 
-        {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-      </nav>
+    <div className="min-h-screen text-white relative overflow-hidden">
+      
 
       {/* Mobile Menu */}
       <div className={`fixed top-0 right-0 w-full h-full bg-black/95 backdrop-blur-lg z-40 transform transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden`}>
@@ -145,7 +119,7 @@ export const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="relative z-10 py-16 sm:py-20 px-4 sm:px-6 bg-[#0E0E17] min-h-screen flex items-center">
+     <section id="stats" className="py-16 sm:py-20 px-4 sm:px-6 relative z-10 bg-gradient-to-b from-[#1f1f2e] to-[#070711] min-h-screen flex items-center">
         <div className="max-w-6xl mx-auto w-full">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">Everything You Need For Spiritual Growth</h2>
@@ -207,34 +181,63 @@ export const LandingPage = () => {
       </section>
 
       {/* Stats Section */}
-      <section id="stats" className="py-16 sm:py-20 px-4 sm:px-6 relative z-10 bg-gradient-to-b from-[#1f1f2e] to-[#070711] min-h-screen flex items-center">
-        <div className="max-w-5xl mx-auto w-full text-center relative z-10">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">Global Impact Statistics</h2>
-          <p className="text-lg sm:text-xl text-[#9999B5] mb-12 sm:mb-16 max-w-2xl mx-auto px-4">
-            Join thousands of soul winners making a difference worldwide
-          </p>
+      import CountUp from "react-countup";
 
-          <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
-            <div className="rounded-2xl p-6 sm:p-8 bg-gradient-to-b from-[#1A1A2C] to-[#0E0E17] border border-[#D946EF] shadow-lg hover:scale-105 transition-transform group">
-              <div className="text-4xl sm:text-5xl font-bold mb-3 text-[#D946EF]">12,847</div>
-              <div className="text-base sm:text-lg text-[#9999B5] mb-2">Souls Tracked</div>
-              <div className="text-xs sm:text-sm text-[#666687]">Across 45 countries</div>
-            </div>
+<section
+  id="stats"
+  className="py-16 sm:py-20 px-4 sm:px-6 relative z-10 bg-gradient-to-b from-[#1f1f2e] to-[#070711] min-h-screen flex items-center"
+>
+  <div className="max-w-5xl mx-auto w-full text-center relative z-10">
+    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-white">
+      Global Impact Statistics
+    </h2>
+    <p className="text-lg sm:text-xl text-[#9999B5] mb-12 sm:mb-16 max-w-2xl mx-auto px-4">
+      Join thousands of soul winners making a difference worldwide
+    </p>
 
-            <div className="rounded-2xl p-6 sm:p-8 bg-gradient-to-b from-[#1A1A2C] to-[#0E0E17] border border-yellow-400 shadow-lg hover:scale-105 transition-transform group">
-              <div className="text-4xl sm:text-5xl font-bold mb-3 text-yellow-400">4,328</div>
-              <div className="text-base sm:text-lg text-[#9999B5] mb-2">Salvations Recorded</div>
-              <div className="text-xs sm:text-sm text-[#666687]">Lives transformed forever</div>
-            </div>
-
-            <div className="rounded-2xl p-6 sm:p-8 bg-gradient-to-b from-[#1A1A2C] to-[#0E0E17] border border-[#60A5FA] shadow-lg hover:scale-105 transition-transform group">
-              <div className="text-4xl sm:text-5xl font-bold mb-3 text-[#60A5FA]">1,289</div>
-              <div className="text-base sm:text-lg text-[#9999B5] mb-2">Active Soul Winners</div>
-              <div className="text-xs sm:text-sm text-[#666687]">Making daily impact</div>
-            </div>
-          </div>
+    <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
+      {/* Souls Tracked */}
+      <div className="rounded-2xl p-6 sm:p-8 bg-gradient-to-b from-[#1A1A2C] to-[#0E0E17] border border-[#D946EF] shadow-lg hover:scale-105 transition-transform group">
+        <div className="text-4xl sm:text-5xl font-bold mb-3 text-[#D946EF]">
+          <CountUp start={0} end={12847} duration={2.5} separator="," enableScrollSpy={true} />
         </div>
-      </section>
+        <div className="text-base sm:text-lg text-[#9999B5] mb-2">
+          Souls Tracked
+        </div>
+        <div className="text-xs sm:text-sm text-[#666687]">
+          Across 45 countries
+        </div>
+      </div>
+
+      {/* Salvations Recorded */}
+      <div className="rounded-2xl p-6 sm:p-8 bg-gradient-to-b from-[#1A1A2C] to-[#0E0E17] border border-yellow-400 shadow-lg hover:scale-105 transition-transform group">
+        <div className="text-4xl sm:text-5xl font-bold mb-3 text-yellow-400">
+          <CountUp start={0} end={4328} duration={2.5} separator="," enableScrollSpy={true} />
+        </div>
+        <div className="text-base sm:text-lg text-[#9999B5] mb-2">
+          Salvations Recorded
+        </div>
+        <div className="text-xs sm:text-sm text-[#666687]">
+          Lives transformed forever
+        </div>
+      </div>
+
+      {/* Active Soul Winners */}
+      <div className="rounded-2xl p-6 sm:p-8 bg-gradient-to-b from-[#1A1A2C] to-[#0E0E17] border border-[#60A5FA] shadow-lg hover:scale-105 transition-transform group">
+        <div className="text-4xl sm:text-5xl font-bold mb-3 text-[#60A5FA]">
+          <CountUp start={0} end={1289} duration={2.5} separator="," enableScrollSpy={true} />
+        </div>
+        <div className="text-base sm:text-lg text-[#9999B5] mb-2">
+          Active Soul Winners
+        </div>
+        <div className="text-xs sm:text-sm text-[#666687]">
+          Making daily impact
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* CTA Section */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-r from-[#1A1A2C] to-[#0E0E17] relative overflow-hidden min-h-screen flex items-center">
@@ -336,6 +339,7 @@ export const LandingPage = () => {
       {/* Auth Modal */}
       <AuthModal isOpen={authOpen} onClose={() => setAuthOpen(false)} />
     </div>
+    </>
   );
 };
 
