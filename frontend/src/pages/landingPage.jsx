@@ -61,15 +61,16 @@ export const LandingPage = () => {
       </div>
 
       {/* Hero Section with Background */}
-     <section className="relative px-4 sm:px-6 pt-28 pb-16 sm:pt-32 sm:pb-20 text-center min-h-screen flex items-center justify-center">
- <div 
-  className="absolute inset-0 bg-fixed bg-center"
-  style={{ 
-    backgroundImage: "url('rgm1.png')",
-    backgroundSize: "60%", // Adjust this percentage
-    backgroundRepeat: "no-repeat"
-  }}
-></div>
+     {/* Hero Section with Background */}
+     <section className="bg-gradient-to-r from-[#1A1A2C] to-[#0E0E17]  relative px-4 sm:px-6 pt-28 pb-16 sm:pt-32 sm:pb-20 text-center min-h-screen flex items-center justify-center">
+        <div 
+          className="absolute inset-0 bg-fixed bg-center"
+          style={{ 
+            backgroundImage: "url('rgm1.png')",
+            backgroundSize: "60%", // Adjust this percentage
+            backgroundRepeat: "no-repeat"
+          }}
+        ></div>
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-black/90 z-0"></div>
 
@@ -181,7 +182,7 @@ export const LandingPage = () => {
       </section>
 
       {/* Stats Section */}
-      import CountUp from "react-countup";
+      {/* import CountUp from "react-countup"; */}
 
 <section
   id="stats"

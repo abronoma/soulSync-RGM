@@ -129,20 +129,21 @@ const WelcomeDashboard = () => {
               </div>
 
               {/* Form Buttons */}
-              <div className="flex flex-col md:flex-row gap-2 mt-6">
-                <button
-                  onClick={() => openPanel("quarterly")}
-                  className="w-48 py-2 px-4 bg-[#D946EF] hover:bg-[#bb38d8] rounded font-medium transition-colors text-white"
-                >
-                  Quarterly Retreat
-                </button>
-                <button
-                  onClick={() => openPanel("weekly")}
-                  className="w-48 py-2 px-4 bg-[#f7e928b9] hover:bg-[#dfee0f] rounded font-medium transition-colors text-white"
-                >
-                  Weekly Report
-                </button>
-              </div>
+<div className="flex flex-row gap-2 mt-6">
+  <button
+    onClick={() => openPanel("quarterly")}
+    className="w-48 py-2 px-4 bg-[#D946EF] hover:bg-[#bb38d8] rounded font-medium transition-colors text-white"
+  >
+    Quarterly Retreat
+  </button>
+  <button
+    onClick={() => openPanel("weekly")}
+    className="w-48 py-2 px-4 bg-[#f7e928b9] hover:bg-[#dfee0f] rounded font-medium transition-colors text-white"
+  >
+    Weekly Report
+  </button>
+</div>
+
             </div>
           </div>
         )}
